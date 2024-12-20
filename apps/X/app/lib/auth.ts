@@ -8,6 +8,9 @@ interface credentialsTypes {
   email: string;
 }
 
+
+
+
 export const authOptions = {
   providers: [
     GithubProvider({
