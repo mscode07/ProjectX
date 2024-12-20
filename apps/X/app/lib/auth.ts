@@ -1,6 +1,13 @@
 import CredentialsProvider from "next-auth/providers/credentials";
+import Email from "next-auth/providers/email";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+
+interface credentialsTypes {
+  name: string;
+  password: string;
+  email: string;
+}
 
 export const authOptions = {
   providers: [
@@ -16,10 +23,14 @@ export const authOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        username: { label: "email", type: "text", placeholder: "" },
+        username: { label: "username", type: "text", placeholder: "" },
+        email: { label: "email", type: "text", placeholder: "" },
         password: { label: "Password", type: "password", placeholder: "" },
       },
-      async authorize() {
+
+      async authorize(credentials, req) {
+        if (!credentials) return null;
+        const { username, email, password } = credentials;
         return {
           id: "user",
         };
