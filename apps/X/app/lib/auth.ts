@@ -115,18 +115,10 @@ export const authOptions = {
   Secret: process.env.NEXTAUTH_SECRET || "secr3t",
 
   callbacks: {
-    async session({
-      token,
-      session,
-    }: {
-      token: JWT;
-      session: Session & { user: { id: string | undefined } };
-    }) {
+    async session({ token, session }: { token: JWT; session: any }) {
       session.user.id = token.sub;
       return session;
     },
-    //},
-
     async signIn({ user, account, profile }: any) {
       if (account?.privider === "github" || account?.provider === "google") {
         const existingUser = await db.user.findUnique({
@@ -144,11 +136,11 @@ export const authOptions = {
             });
           } catch (error) {
             console.log("Error while creating user from Github", error);
-            return false;
+            // return false;
           }
         }
-        return true;
       }
+      return true;
     },
   },
   page: {
