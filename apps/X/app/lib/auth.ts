@@ -114,7 +114,7 @@ export const authOptions = {
   Secret: process.env.NEXTAUTH_SECRET || "secr3t",
 
   callbacks: {
-    async jwt({ token }: JWT) {
+    async jwt({ token }: { token: JWT }) {
       console.log(token, "this is the userToken");
 
       return token;
