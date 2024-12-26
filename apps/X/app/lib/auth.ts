@@ -1,6 +1,5 @@
 import db from "@repo/db/client";
 import bcrypt from "bcrypt";
-import { Session } from "inspector/promises";
 import { JWT } from "next-auth/jwt";
 
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -115,32 +114,25 @@ export const authOptions = {
   Secret: process.env.NEXTAUTH_SECRET || "secr3t",
 
   callbacks: {
-    async session({ token, session }: { token: JWT; session: any }) {
-      session.user.id = token.sub;
-      return session;
+    async jwt({ token }: JWT) {
+      console.log(token, "this is the userToken");
+
+      return token;
     },
-    async signIn({ user, account, profile }: any) {
-      if (account?.privider === "github" || account?.provider === "google") {
-        const existingUser = await db.user.findUnique({
-          where: { email: user.email },
-        });
-        if (!existingUser) {
-          try {
-            await db.user.create({
-              data: {
-                email: user.email,
-                name: user.name,
-                username: user.email.split("@")[0],
-                password: "",
-              },
-            });
-          } catch (error) {
-            console.log("Error while creating user from Github", error);
-            // return false;
-          }
-        }
+
+    async session({ session, token }: any) {
+      const user = await db.user.findUnique({
+        where: { id: token.sub },
+      });
+      console.log(user, "Thsi is the user");
+
+      if (token) {
+        session.accessToken = token.accessToken;
+        console.log(session.accessToken, " This is from the sesson function 1");
+        session.userid = token.sub;
+        console.log(session.userid, " This is from the sesson function 2");
       }
-      return true;
+      return session;
     },
   },
   page: {
