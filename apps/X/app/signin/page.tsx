@@ -1,9 +1,11 @@
-import { SigninComp } from "../components";
+
+import { SigninComp } from "@/components/ui";
+
 
 const SignIn = () => {
   return (
     <div>
-      <div className="bg-red-500">
+      <div className="">
         <SigninComp />
       </div>
     </div>
