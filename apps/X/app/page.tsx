@@ -1,7 +1,12 @@
+import { SigninComp } from "@/components/ui";
 import React from "react";
 
 const Page = () => {
-  return <div>Page</div>;
+  return (
+    <div className="">
+      <SigninComp />
+    </div>
+  );
 };
 
 export default Page;

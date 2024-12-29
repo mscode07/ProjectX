@@ -135,7 +135,7 @@ export const authOptions = {
       return session;
     },
   },
-  page: {
-    signIn: "/auth",
+  pages: {
+    signIn: "/",
   },
 };
