@@ -1,7 +1,6 @@
 import db from "@repo/db/client";
 import bcrypt from "bcrypt";
 import { JWT } from "next-auth/jwt";
-
 import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
@@ -59,7 +58,6 @@ export const authOptions = {
         if (!validatedUserInput) return null;
 
         const hashedPassword = await bcrypt.hash(credentials.password, 10);
-        console.log(hashedPassword);
 
         const existingUser = await db.user.findFirst({
           where: {
@@ -70,6 +68,8 @@ export const authOptions = {
 
         if (existingUser) {
           try {
+            console.log("This is old user");
+
             const passwordValidation = await bcrypt.compare(
               credentials.password,
               existingUser.password
@@ -89,6 +89,8 @@ export const authOptions = {
         }
 
         try {
+          console.log("Creating New User....");
+          
           const user = await db.user.create({
             data: {
               username: credentials.username,

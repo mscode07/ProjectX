@@ -1,5 +1,5 @@
 {
-  "name": "ProjectX",
+  "name": "projectx",
   "private": true,
   "scripts": {
     "build": "turbo build",

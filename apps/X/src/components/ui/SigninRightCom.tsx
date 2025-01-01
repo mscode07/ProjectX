@@ -52,12 +52,6 @@ export const SigninRightCom = () => {
             <p className="px-2 text-slate-500">or</p>
             <hr className="w-72 h-0.5 my-4 bg-gray-200 border-0 rounded dark:bg-gray-700"></hr>
           </div>
-          {/* <Button
-            className="bg-twitterBlue hover:bg-blue-500 px-24 mt-0 rounded-2xl text-white"
-            onClick={handleCredentialsSignIn}
-          >
-            Create Account
-          </Button> */}
           <Dialog>
             <DialogTrigger className="bg-twitterBlue hover:bg-blue-500 py-1 px-24 mt-0 rounded-2xl text-white">
               Create Account
@@ -77,12 +71,7 @@ export const SigninRightCom = () => {
             <span className="text-twitterBlue"> Cookie Use.</span>
           </p>
           <div className="mt-12 font-semibold">Already have an account?</div>
-          {/* <Button
-            variant={"outline"}
-            className="mt-3 px-28 rounded-2xl text-twitterBlue"
-          >
-            Sign In
-          </Button> */}
+          
           <Dialog>
             <DialogTrigger className=" border border-slate-500 py-1 px-24 mt-1 rounded-2xl text-twitterBlue font-semibold hover:bg-slate-900 ">
               Sign In
