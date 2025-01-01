@@ -1,12 +1,41 @@
+"use client";
 import { signIn } from "next-auth/react";
+import { useState } from "react";
 import { Button } from "./button";
 import { Input } from "./index";
 import { X_logo } from "./X_logo";
 
 export const UserCredentials = () => {
-  const handleCredentialsSignIn = () => {
-    signIn("credentials");
+  const [formData, setFormData] = useState({
+    username: "",
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handelFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
+
+  const handelCredentialSignin = async () => {
+    console.log("Reaching here");
+    try {
+      console.log("Reaching here");
+
+      await signIn("credentials", {
+        username: formData.username,
+        email: formData.email,
+        name: formData.name,
+        password: formData.password,
+      });
+    } catch (error) {
+      console.log(error, "Error with Credentials");
+    }
+  };
+
   return (
     <div>
       <div className="">
@@ -20,26 +49,38 @@ export const UserCredentials = () => {
             type="text"
             placeholder="Username"
             className="m-4 focus:border-blue-500"
+            value={formData.username}
+            onChange={handelFormChange}
+            name="username"
           />
           <Input
             type="text"
             placeholder="Name"
             className="m-4 focus:border-blue-500"
+            value={formData.name}
+            onChange={handelFormChange}
+            name="name"
           />
           <Input
             type="text"
             placeholder="Email"
             className="m-4 focus:border-blue-500"
+            value={formData.email}
+            onChange={handelFormChange}
+            name="email"
           />
           <Input
-            type="passowrd"
+            type="password"
             placeholder="Password"
             className="m-4 focus:border-blue-500"
+            value={formData.password}
+            onChange={handelFormChange}
+            name="password"
           />
         </div>
         <Button
           className="w-full ml-4 rounded-2xl font-bold text-twitterBlue"
-          onClick={handleCredentialsSignIn}
+          onClick={handelCredentialSignin}
         >
           Create Account
         </Button>
