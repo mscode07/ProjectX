@@ -71,14 +71,14 @@ export const SigninRightCom = () => {
             <span className="text-twitterBlue"> Cookie Use.</span>
           </p>
           <div className="mt-12 font-semibold">Already have an account?</div>
-          
+
           <Dialog>
-            <DialogTrigger className=" border border-slate-500 py-1 px-24 mt-1 rounded-2xl text-twitterBlue font-semibold hover:bg-slate-900 ">
+            <DialogTrigger className=" border border-slate-500 py-1 px-32 mt-1 rounded-2xl text-twitterBlue font-semibold hover:bg-slate-900 ">
               Sign In
             </DialogTrigger>
             <DialogContent className="bg-black min-w-96 max-w-96">
               <DialogHeader>
-                <DialogTitle className="w-4/5 flex items-center justify-center ">
+                <DialogTitle className="flex flex-col justify-center items-center">
                   <LoginComp />
                 </DialogTitle>
               </DialogHeader>

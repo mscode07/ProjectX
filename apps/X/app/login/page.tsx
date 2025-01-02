@@ -1,9 +1,11 @@
-import { SigninComp } from "@/components/ui";
+import { LoginComp } from "@/components/ui";
 
 const Login = () => {
   return (
     <div>
-      <div className=""></div>
+      <div className="flex justify-center items-center h-screen">
+        <LoginComp />
+      </div>
     </div>
   );
 };
