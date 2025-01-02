@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "./button";
 import { Input } from "./index";
 import { X_logo } from "./X_logo";
+import Link from "next/link";
 
 export const UserCredentials = () => {
   const [formData, setFormData] = useState({
@@ -84,6 +85,15 @@ export const UserCredentials = () => {
         >
           Create Account
         </Button>
+
+        <div className="mb-16 mt-2 ml-6">
+          <p className="text-xs text-slate-600 mt-0.5 w-64">
+            Already have Account ?{" "}
+            <span className="text-twitterBlue hover:underline cursor-pointer">
+              <Link href={"/login"}>Login</Link>
+            </span>
+          </p>
+        </div>
       </div>
     </div>
   );
