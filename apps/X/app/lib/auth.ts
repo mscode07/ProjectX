@@ -53,8 +53,6 @@ export const authOptions = {
           });
         };
 
-        console.log(credentials, "User credentilas");
-
         if (!validatedUserInput) return null;
 
         const hashedPassword = await bcrypt.hash(credentials.password, 10);
@@ -62,19 +60,20 @@ export const authOptions = {
         const existingUser = await db.user.findFirst({
           where: {
             username: credentials.username,
-            email: credentials.email,
+            // email: credentials.email,
           },
         });
 
         if (existingUser) {
           try {
-            console.log("This is old user");
-
             const passwordValidation = await bcrypt.compare(
               credentials.password,
               existingUser.password
             );
+            console.log("This is the password", passwordValidation);
             if (passwordValidation) {
+              console.log("This is userEmail", existingUser.email);
+              console.log("This is username", existingUser.username);
               return {
                 id: existingUser?.id.toString(),
                 usernname: existingUser.username,
@@ -82,15 +81,17 @@ export const authOptions = {
                 name: existingUser.name,
               };
             }
+
+            console.log("This is name", existingUser.name);
           } catch (error) {
-            console.log(error, "Error while LogIn");
+            console.log("Error while LogIn", error);
           }
           return null;
         }
 
         try {
           console.log("Creating New User....");
-          
+
           const user = await db.user.create({
             data: {
               username: credentials.username,
@@ -103,7 +104,6 @@ export const authOptions = {
             id: user.id.toString(),
             name: user.name,
             username: user.username,
-            email: user.email,
           };
         } catch (error) {
           console.log(error, "Not able to Create new user");
@@ -117,8 +117,6 @@ export const authOptions = {
 
   callbacks: {
     async jwt({ token }: { token: JWT }) {
-      console.log(token, "this is the userToken");
-
       return token;
     },
 
@@ -131,7 +129,7 @@ export const authOptions = {
       if (token) {
         session.accessToken = token.accessToken;
         console.log(session.accessToken, " This is from the sesson function 1");
-        session.userid = token.sub;
+        session.user.id = token.sub;
         console.log(session.userid, " This is from the sesson function 2");
       }
       return session;
