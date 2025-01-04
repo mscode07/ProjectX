@@ -11,10 +11,10 @@ import Link from "next/link";
 export const LoginComp = () => {
   const [formData, setFormData] = useState({
     username: "",
-    name: "",
-    email: "",
     password: "",
   });
+
+  const [error, setError] = useState("");
 
   const handelFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -23,15 +23,20 @@ export const LoginComp = () => {
     });
   };
 
-  const handelCredentialSignin = async () => {
+  const handleGoogleSignIn = async () => {
+    await signIn("google");
+  };
+  const handleGithubSignIn = async () => {
+    await signIn("github");
+  };
+
+  const handelCredentialLogin = async () => {
     console.log("Reaching here");
     try {
-      console.log("Reaching here");
+      console.log("Login Components Reaching here");
 
-      await signIn("credentials", {
+      const result = await signIn("credentials", {
         username: formData.username,
-        email: formData.email,
-        name: formData.name,
         password: formData.password,
       });
     } catch (error) {
@@ -44,23 +49,21 @@ export const LoginComp = () => {
       <div className="">
         <X_logo />
       </div>
-
       <div className="w-72">
         <div className="text-xl my-4 ">Sign in to 𝕏 </div>
-
         <div className="">
           <div className="">
             <div className="flex flex-col justify-start items-start">
               <Button
                 className="w-full rounded-2xl"
-                // onClick={handleGoogleSignIn}
+                onClick={handleGoogleSignIn}
               >
                 {" "}
                 <FcGoogle /> Sign UP with Google{" "}
               </Button>
               <Button
                 className="mt-2 w-full rounded-2xl font-bold"
-                // onClick={handleGithubSignIn}
+                onClick={handleGithubSignIn}
               >
                 {" "}
                 <FaGithub /> Sign UP with Github{" "}
@@ -96,7 +99,7 @@ export const LoginComp = () => {
 
         <Button
           className="w-full rounded-2xl font-bold text-twitterBlue"
-          onClick={handelCredentialSignin}
+          onClick={handelCredentialLogin}
         >
           Login
         </Button>

@@ -7,6 +7,9 @@ import { X_logo } from "./X_logo";
 import { Input } from "./input";
 import { LoginComp } from "./LoginComp";
 import { UserCredentials } from "./UserCredentials";
+import { HomeRight } from "../home/HomeRight";
+import { HomeLeft } from "../home/HomeLeft";
+import { CenterComp } from "../home/CenterComp";
 
 export {
   SigninComp,
@@ -16,6 +19,9 @@ export {
   Dialog,
   X_logo,
   Input,
+  HomeRight,
+  HomeLeft,
+  CenterComp,
   UserCredentials,
   LoginComp,
 };
