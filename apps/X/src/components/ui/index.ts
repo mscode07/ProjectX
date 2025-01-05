@@ -9,14 +9,18 @@ import { LoginComp } from "./LoginComp";
 import { UserCredentials } from "./UserCredentials";
 import { HomeRight } from "../home/HomeRight";
 import { HomeLeft } from "../home/HomeLeft";
-import { CenterComp } from "../home/CenterComp";
+import { CenterComp } from "../home/HomeCenterComp";
+import { TweetComp } from "./TweetComp";
+import { UserAvatar } from "./usrAvatar";
 
 export {
   SigninComp,
+  UserAvatar,
   SigninRightCom,
   Button,
   X_logoBIG,
   Dialog,
+  TweetComp,
   X_logo,
   Input,
   HomeRight,

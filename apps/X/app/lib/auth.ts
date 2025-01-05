@@ -116,26 +116,25 @@ export const authOptions = {
   Secret: process.env.NEXTAUTH_SECRET || "secr3t",
 
   callbacks: {
-    async jwt({ token }: { token: JWT }) {
+    async jwt({ token, user }: any) {
+      if (user) {
+        token.id = user.id;
+      }
       return token;
     },
-
     async session({ session, token }: any) {
-      const user = await db.user.findUnique({
-        where: { id: token.sub },
-      });
-      console.log(user, "Thsi is the user");
+      // const user = await db.user.findUnique({
+      //   where: { id: token.sub },
+      // });
 
       if (token) {
-        session.accessToken = token.accessToken;
-        console.log(session.accessToken, " This is from the sesson function 1");
         session.user.id = token.sub;
-        console.log(session.userid, " This is from the sesson function 2");
       }
+
       return session;
     },
   },
   pages: {
-    signIn: "/",
+    signIn: "/signin",
   },
 };
