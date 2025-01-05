@@ -31,6 +31,8 @@ export const UserCredentials = () => {
         email: formData.email,
         name: formData.name,
         password: formData.password,
+        redirect: true,
+        callbackUrl: "/home",
       });
     } catch (error) {
       console.log(error, "Error with Credentials");

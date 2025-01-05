@@ -38,6 +38,8 @@ export const LoginComp = () => {
       const result = await signIn("credentials", {
         username: formData.username,
         password: formData.password,
+        redirect: true,
+        callbackUrl: "/home",
       });
     } catch (error) {
       console.log(error, "Error with Credentials");
