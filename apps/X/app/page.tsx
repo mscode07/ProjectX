@@ -4,15 +4,14 @@ import { redirect } from "next/navigation";
 
 const Page = async () => {
   const session = await getServerSession(authOptions);
+  console.log(session, "This is the session log");
 
-  if (!session) {
-    console.log("No session,redirecting to SIGNIN");
+  if (!session?.user?.id) {
+    console.log("No valid session, redirecting to signin");
     redirect("/signin");
   }
-  if (session.user && session.user.id) {
-    redirect("/home");
-  }
-  return <div>Loading......</div>;
+  console.log("Valid session detected, redirecting to /home");
+  redirect("/home");
 };
 
 export default Page;

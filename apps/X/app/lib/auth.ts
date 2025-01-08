@@ -4,6 +4,7 @@ import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+import { signOut } from "next-auth/react";
 import z from "zod";
 
 interface credentialsTypes {
@@ -15,8 +16,8 @@ interface credentialsTypes {
 
 const userInput = z.object({
   username: z.string(),
-  name: z.string(),
-  email: z.string().email(),
+  name: z.string().optional(),
+  email: z.string().email().optional(),
   password: z.string(),
 });
 
@@ -52,7 +53,11 @@ export const authOptions = {
             name: creds.name,
           });
         };
-
+        const validationResult = validatedUserInput(credentials);
+        if (!validationResult.success) {
+          console.log("Validation failed", validationResult.error);
+          return null;
+        }
         if (!validatedUserInput) return null;
 
         const hashedPassword = await bcrypt.hash(credentials.password, 10);
@@ -70,7 +75,6 @@ export const authOptions = {
               credentials.password,
               existingUser.password
             );
-            console.log("This is the password", passwordValidation);
             if (passwordValidation) {
               console.log("This is userEmail", existingUser.email);
               console.log("This is username", existingUser.username);
@@ -80,8 +84,9 @@ export const authOptions = {
                 email: existingUser.email,
                 name: existingUser.name,
               };
+            } else {
+              console.log("Invalid password for existing user");
             }
-
             console.log("This is name", existingUser.name);
           } catch (error) {
             console.log("Error while LogIn", error);
@@ -119,6 +124,8 @@ export const authOptions = {
     async jwt({ token, user }: any) {
       if (user) {
         token.id = user.id;
+        token.username = user.username;
+        token.email = user.email;
       }
       return token;
     },
@@ -127,14 +134,17 @@ export const authOptions = {
       //   where: { id: token.sub },
       // });
 
-      if (token) {
-        session.user.id = token.sub;
+      if (token && session.user) {
+        session.user.id = token.id || null;
+        session.user.username = token.username || null;
+        session.user.email = token.email || null;
       }
-
       return session;
     },
   },
   pages: {
     signIn: "/signin",
+    error: "/error",
+    signOut: "/signin",
   },
 };
