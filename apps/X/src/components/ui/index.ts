@@ -1,6 +1,5 @@
 import { SigninRightCom } from "./SigninRightCom";
 import { SigninComp } from "./SigninComp";
-import { Button } from "@repo/ui/button";
 import { X_logoBIG } from "./X_logoBIG";
 import { Dialog } from "./dialog";
 import { X_logo } from "./X_logo";
@@ -12,12 +11,13 @@ import { HomeLeft } from "../home/HomeLeft";
 import { CenterComp } from "../home/HomeCenterComp";
 import { TweetComp } from "./TweetComp";
 import { UserAvatar } from "./usrAvatar";
+import { Button } from "./button";
 
 export {
   SigninComp,
+  Button,
   UserAvatar,
   SigninRightCom,
-  Button,
   X_logoBIG,
   Dialog,
   TweetComp,

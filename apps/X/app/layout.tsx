@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { Provieder } from "./provider";
+import { Provider } from "./provider";
+import { RouteGard } from "@/components/RouteGuard";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,11 +25,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <Provieder>
+      <Provider>
         <body className={`${geistSans.variable} ${geistMono.variable} m-0`}>
-          {children}
+          <RouteGard>{children}</RouteGard>
         </body>
-      </Provieder>
+      </Provider>
     </html>
   );
 }

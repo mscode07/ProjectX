@@ -1,6 +1,11 @@
-import { CenterComp, HomeLeft, HomeRight } from "@/components/ui";
+"use client";
 
+import { HomeRight, Button, CenterComp, HomeLeft } from "@/components/ui";
+import { signOut } from "next-auth/react";
 const homepage = () => {
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: "/" });
+  };
   return (
     <div>
       <HomeRight />
