@@ -10,12 +10,26 @@ export function RouteGard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   useEffect(() => {
-    if (status == "loading") {
-      return;
-    }
-    if (!session && !publicPaths.includes(pathname)) {
-      router.push("/signin");
-    }
+    const handleRouting = async () => {
+      try {
+        if (status === "loading") return;
+
+        if (!session && !publicPaths.includes(pathname)) {
+          console.log("No session, redirecting to signin");
+          await router.replace("/signin");
+          return;
+        }
+
+        if (session && publicPaths.includes(pathname)) {
+          console.log("Session exists, redirecting to home");
+          await router.replace("/home");
+        }
+      } catch (error) {
+        console.error("RouteGuard error:", error);
+      }
+    };
+
+    handleRouting();
   }, [session, status, router, pathname]);
 
   if (status == "loading") {

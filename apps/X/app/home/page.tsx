@@ -1,16 +1,12 @@
 "use client";
 
-import { HomeRight, Button, CenterComp, HomeLeft } from "@/components/ui";
+import { HomeComp } from "@/components/ui";
+import { HomeIcon } from "lucide-react";
 import { signOut } from "next-auth/react";
 const homepage = () => {
-  const handleLogout = async () => {
-    await signOut({ callbackUrl: "/" });
-  };
   return (
     <div>
-      <HomeRight />
-      <CenterComp />
-      <HomeLeft />
+      <HomeComp />
     </div>
   );
 };
