@@ -193,11 +193,7 @@ export const authOptions = {
             username: user.username,
           });
         }
-        return {
-          id: user.id.toString(),
-          name: user.name,
-          username: user.username,
-        };
+        return true;
       } catch (error) {
         console.error("SignIn Error ", error);
         return false;
