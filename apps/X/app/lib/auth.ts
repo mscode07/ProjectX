@@ -4,7 +4,7 @@ import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import { signOut } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import z from "zod";
 
 interface credentialsTypes {
@@ -26,10 +26,28 @@ export const authOptions = {
     GithubProvider({
       clientId: process.env.GITHUB_ID || "",
       clientSecret: process.env.GITHUB_SECRET || "",
+      profile(profile) {
+        return {
+          id: profile.id.toString(),
+          name: profile.name || profile.login,
+          email: profile.email,
+          username: profile.login,
+          image: profile.avatar_url,
+        };
+      },
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+      profile(profile) {
+        return {
+          id: profile.sub,
+          name: profile.name,
+          email: profile.email,
+          username: profile.email.split("@")[0],
+          image: profile.picture,
+        };
+      },
     }),
 
     CredentialsProvider({
@@ -118,10 +136,12 @@ export const authOptions = {
       },
     }),
   ],
-  Secret: process.env.NEXTAUTH_SECRET || "secr3t",
+  secret: process.env.NEXTAUTH_SECRET || "secr3t",
 
   callbacks: {
-    async jwt({ token, user }: any) {
+    async jwt({ token, user, account }: any) {
+      console.log("JWT Callback - User:", user);
+      console.log("JWT Callback - Account:", account);
       if (user) {
         token.id = user.id;
         token.username = user.username;
@@ -140,6 +160,44 @@ export const authOptions = {
         session.user.email = token.email || null;
       }
       return session;
+    },
+
+    async signIn({ user, profile, account }: any) {
+      try {
+        const existingUser = await db.user.findFirst({
+          where: {
+            OR: [{ email: user.email }, { username: user.username }],
+          },
+        });
+
+        if (!existingUser) {
+          await db.user.create({
+            data: {
+              // Make sure this matches your DB schema
+              username:
+                user.username ||
+                (account.provider === "github"
+                  ? profile.login
+                  : profile.email.split("@")[0]),
+              email: user.email || `${user.id}@${account.provider}.user`,
+              name: user.name,
+              password: "",
+              // image: user.image,
+            },
+          });
+          console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+
+          console.log({
+            id: user.id.toString(),
+            name: user.name,
+            username: user.username,
+          });
+        }
+        return true;
+      } catch (error) {
+        console.error("SignIn Error ", error);
+        return false;
+      }
     },
   },
   pages: {
