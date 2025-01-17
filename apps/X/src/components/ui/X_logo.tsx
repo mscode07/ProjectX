@@ -1,7 +1,7 @@
 export const X_logo = () => {
   return (
     <div>
-      <div className="flex justify-center items-center">
+      <div className="">
         <svg
           viewBox="0 0 24 24"
           aria-hidden="true"

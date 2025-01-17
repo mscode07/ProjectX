@@ -41,7 +41,7 @@ export const UserCredentials = () => {
 
   return (
     <div>
-      <div className="">
+      <div className="ml-4">
         <X_logo />
       </div>
 

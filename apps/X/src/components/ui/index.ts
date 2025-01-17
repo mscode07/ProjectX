@@ -7,16 +7,21 @@ import { Input } from "./input";
 import { LoginComp } from "./LoginComp";
 import { UserCredentials } from "./UserCredentials";
 import { HomeRight } from "../home/HomeRight";
-import { HomeLeft } from "../home/HomeLeft";
 import { CenterComp } from "../home/CenterComp";
 import { TweetComp } from "./TweetComp";
 import { UserAvatar } from "./usrAvatar";
 import { Button } from "./button";
 import { HomeComp } from "../home/HomeComp";
+import { HomeLeft } from "../home/HomeLeft";
+import { TopHead } from "./topHead";
+import { TopPost } from "./TopPost";
 
 export {
+  TopHead,
+  TopPost,
   SigninComp,
   HomeComp,
+  HomeLeft,
   Button,
   UserAvatar,
   SigninRightCom,
@@ -26,7 +31,6 @@ export {
   X_logo,
   Input,
   HomeRight,
-  HomeLeft,
   CenterComp,
   UserCredentials,
   LoginComp,
