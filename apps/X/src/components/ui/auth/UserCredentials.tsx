@@ -1,9 +1,9 @@
 "use client";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
-import { Button } from "./button";
-import { Input } from "./index";
-import { X_logo } from "./X_logo";
+import { Button } from "../button";
+import { Input } from "../index";
+import { X_logo } from "../X_logo";
 import Link from "next/link";
 
 export const UserCredentials = () => {

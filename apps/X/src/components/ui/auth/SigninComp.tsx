@@ -1,4 +1,4 @@
-import { SigninRightCom, X_logoBIG } from "./index";
+import { SigninRightCom, X_logoBIG } from "../index";
 
 export const SigninComp = () => {
   return (

@@ -8,7 +8,7 @@ import { RiShare2Line } from "react-icons/ri";
 <RiShare2Line />;
 export const TweetComp = () => {
   return (
-    <div className="border border-slate-800 border-x-0">
+    <div className="border border-slate-800 border-spacing-x-0.5">
       <div className="flex p-3 gap-2">
         <div className="mt-1">
           <UserAvatar />

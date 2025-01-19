@@ -1,9 +1,9 @@
-import { TopHead, TopPost, TweetComp } from "../ui";
+import { TopHead, TopPost, TweetComp } from "..";
 
 export const CenterComp = () => {
   return (
     <div>
-      <div className="border border-slate-800 border-x-0">
+      <div className="">
         <TopHead />
       </div>
       <div>
@@ -15,3 +15,4 @@ export const CenterComp = () => {
     </div>
   );
 };
+//border border-slate-800 border-x-0

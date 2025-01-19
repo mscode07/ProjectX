@@ -10,7 +10,7 @@ export const HomeComp = () => {
           <HomeLeft />
         </div>
         <div className="flex mx-10">
-          <div className="border col-span-3">
+          <div className="border border-y-0 col-span-3 ">
             <CenterComp />
           </div>
           <div className="ml-10 col-span-2 ">
