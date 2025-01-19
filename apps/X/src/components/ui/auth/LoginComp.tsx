@@ -1,8 +1,8 @@
 "use client";
 import { signIn } from "next-auth/react";
-import { X_logo } from "./X_logo";
-import { Input } from "./input";
-import { Button } from "./button";
+import { X_logo } from "../X_logo";
+import { Input } from "../input";
+import { Button } from "../button";
 import { useState } from "react";
 import { FaGithub } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";

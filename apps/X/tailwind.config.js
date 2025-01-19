@@ -12,7 +12,7 @@ export default {
   theme: {
     extend: {
       screens: {
-        custom: "943px",
+        custom: "927px",
       },
       borderRadius: {
         lg: "var(--radius)",
