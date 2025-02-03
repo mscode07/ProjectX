@@ -1,11 +1,21 @@
 import db from "@repo/db/client";
 import bcrypt from "bcrypt";
-import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import { signIn, signOut } from "next-auth/react";
+import { Session } from "next-auth";
 import z from "zod";
+
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+    };
+  }
+}
 
 interface credentialsTypes {
   username: string;
@@ -97,7 +107,7 @@ export const authOptions = {
               console.log("This is userEmail", existingUser.email);
               console.log("This is username", existingUser.username);
               return {
-                id: existingUser?.id.toString(),
+                id: existingUser.id.toString(),
                 usernname: existingUser.username,
                 email: existingUser.email,
                 name: existingUser.name,
@@ -127,6 +137,7 @@ export const authOptions = {
             id: user.id.toString(),
             name: user.name,
             username: user.username,
+            email: user.email,
           };
         } catch (error) {
           console.log(error, "Not able to Create new user");
@@ -142,6 +153,8 @@ export const authOptions = {
     async jwt({ token, user, account }: any) {
       console.log("JWT Callback - User:", user);
       console.log("JWT Callback - Account:", account);
+      console.log("OOOOOOOOOOO", token.id);
+
       if (user) {
         token.id = user.id;
         token.username = user.username;
@@ -150,15 +163,16 @@ export const authOptions = {
       return token;
     },
     async session({ session, token }: any) {
-      // const user = await db.user.findUnique({
-      //   where: { id: token.sub },
-      // });
+      console.log("Session Callback - Token:", token);
+      console.log("Session Callback - Initial Session:", session);
 
       if (token && session.user) {
-        session.user.id = token.id || null;
+        session.user.id = token.id as string;
         session.user.username = token.username || null;
         session.user.email = token.email || null;
       }
+
+      console.log("Session Callback - Updated Session:", session);
       return session;
     },
 
@@ -171,9 +185,8 @@ export const authOptions = {
         });
 
         if (!existingUser) {
-          await db.user.create({
+          const newUser = await db.user.create({
             data: {
-              // Make sure this matches your DB schema
               username:
                 user.username ||
                 (account.provider === "github"
@@ -185,13 +198,14 @@ export const authOptions = {
               // image: user.image,
             },
           });
-          console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-
-          console.log({
-            id: user.id.toString(),
-            name: user.name,
-            username: user.username,
-          });
+          user.id = newUser.id.toString();
+          // console.log({
+          //   id: user.id.toString(),
+          //   name: user.name,
+          //   username: user.username,
+          // });
+        } else {
+          user.id = existingUser.id.toString();
         }
         return true;
       } catch (error) {

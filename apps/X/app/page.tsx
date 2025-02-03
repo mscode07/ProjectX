@@ -3,10 +3,10 @@ import { authOptions } from "./lib/auth";
 import { redirect } from "next/navigation";
 
 const Page = async () => {
-  console.log(">>>>>>>>>>>>>>>");
   try {
     const session = await getServerSession(authOptions);
     console.log("Full session object:", JSON.stringify(session, null, 2));
+    console.log("UseriD test>>>>>>>>>>>>>>", session?.user?.id);
 
     if (!session?.user?.id) {
       console.log("No valid session, redirecting to signin");
