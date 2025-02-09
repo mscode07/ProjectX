@@ -2,31 +2,21 @@ import { CenterComp, HomeLeft, HomeRight } from "@/components/ui";
 
 export const HomeComp = () => {
   return (
-    <div>
-      <div></div>
-      <div className="grid grid-cols-6 ">
-        <div></div>
-        <div className="">
-          <HomeLeft />
-        </div>
-        <div className="flex mx-10">
-          <div className="border border-y-0 col-span-3 ">
+    <div className="relative">
+      <div className="flex h-full">
+        <div className="custom:w-96 w-10 custom:ml-24 ml-10"></div>
+        <div className="flex">
+          <div className="custom:px-10 px-2 mr-10 custom:m-0 custom:left-10 left-0">
+            <HomeLeft />
+          </div>
+          <div className="border border-y-0 custom:w-5/12 w-8/12 h-full overflow-y-hidden">
             <CenterComp />
           </div>
-          <div className="ml-10 col-span-2 ">
+          <div className="">
             <HomeRight />
           </div>
         </div>
       </div>
-      {/* <div className="">
-        <div className=""></div>
-        <div className="">
-          <HomeRight />
-        </div>
-        <div className=""></div>
-        <div className=""></div>
-        <div className=""></div>
-      </div> */}
       {/* border-slate-800 border border-y-0 h-screen */}
     </div>
   );
