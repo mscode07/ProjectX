@@ -49,7 +49,7 @@ export const TopPost = () => {
           </div>
           <div>
             <Input
-              className="ffocus:outline-none focus-visible:ring-0 border-none"
+              className="focus:outline-none focus-visible:ring-0 border-none"
               placeholder="What is hanppening?!"
               onChange={handelChanges}
               value={postInput}
@@ -59,40 +59,84 @@ export const TopPost = () => {
         </div>
         <div className="flex items-center ml-12">
           <div className="flex gap-4 text-blue-500 text-lg cursor-pointer">
-            <div>
-              <TbPhotoSquareRounded />
+            <div className="relative group hover:bg-neutral-900 rounded-xl ">
+              <div>
+                <TbPhotoSquareRounded />
+              </div>
+              <span className="absolute left-1/2 -translate-x-1/2  text-sm bg-gray-800 text-white px-2 py-1 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                Media
+              </span>
             </div>
-            <div>
-              <MdOutlineGifBox />
+            <div className="relative group hover:bg-neutral-900 rounded-xl">
+              <div>
+                <MdOutlineGifBox />
+              </div>
+              <span className="absolute left-1/2 -translate-x-1/2  text-sm bg-gray-800 text-white px-2 py-1 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                GIF
+              </span>
             </div>
-            <div>
-              <X_Icon />
+            <div className="relative group hover:bg-neutral-900 rounded-xl">
+              <div>
+                <X_Icon />
+              </div>
+              <span className="absolute left-1/2 -translate-x-1/2  text-sm bg-gray-800 text-white px-2 py-1 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                GROK
+              </span>
             </div>
-            <div>
-              <HiMiniListBullet />
+            <div className="relative group hover:bg-neutral-900 rounded-xl">
+              <div>
+                <HiMiniListBullet />
+              </div>
+              <span className="absolute left-1/2 -translate-x-1/2  text-sm bg-gray-800 text-white px-2 py-1 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                Poll
+              </span>
             </div>
-            <div>
-              <GrEmoji />
+            <div className="relative group hover:bg-neutral-900 rounded-xl">
+              <div>
+                <GrEmoji />
+              </div>
+              <span className="absolute left-1/2 -translate-x-1/2  text-sm bg-gray-800 text-white px-2 py-1 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                Emoji
+              </span>
             </div>
-            <div>
-              <RiCalendarScheduleLine />
+            <div className="relative group hover:bg-neutral-900 rounded-xl">
+              <div>
+                <RiCalendarScheduleLine />
+              </div>
+              <span className="absolute left-1/2 -translate-x-1/2  text-sm bg-gray-800 text-white px-2 py-1 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                Schedule
+              </span>
             </div>
-            <div>
-              <IoLocationOutline />
+            <div className="relative group hover:bg-neutral-900 rounded-xl">
+              <div>
+                <IoLocationOutline />
+              </div>
+              <span className="absolute left-1/2 -translate-x-1/2  text-sm bg-gray-800 text-white px-2 py-1 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                Location
+              </span>
             </div>
-            <div>
-              <BsTypeBold />
+            <div className="relative group hover:bg-neutral-900 rounded-xl">
+              <div>
+                <BsTypeBold />
+              </div>
+              <span className="absolute left-1/2 -translate-x-1/2  text-sm bg-gray-800 text-white px-2 py-1 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                Bold
+              </span>
             </div>
-            <div>
-              <AiOutlineItalic />
+            <div className="relative group hover:bg-neutral-900 rounded-xl">
+              <div>
+                <AiOutlineItalic />
+              </div>
+              <span className="absolute left-1/2 -translate-x-1/2  text-sm bg-gray-800 text-white px-2 py-1 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                Italic
+              </span>
             </div>
           </div>
-          <Button
-            onClick={handelClick}
-            className="ml-28 rounded-2xl font-semibold"
-          >
-            Post
-          </Button>
+          <div className="ml-auto">
+            <Button onClick={handelClick} className="rounded-2xl font-semibold">
+              Post
+            </Button>
+          </div>
         </div>
       </div>
     </div>
