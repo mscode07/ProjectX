@@ -130,7 +130,7 @@ export const HomeLeft = () => {
                   Post
                 </Button>
                 <TbOctagonPlus
-                  className="custom:hidden block text-4xl ml-3 cursor-pointer hover:bg-white hover:rounded-3xl hover:text-black "
+                  className="custom:hidden block text-4xl ml-3 cursor-pointer hover:bg-white hover:rounded-3xl hover:text-black"
                   onClick={onPostClick}
                 />
               </div>
