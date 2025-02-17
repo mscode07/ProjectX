@@ -5,7 +5,7 @@ import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import { Session } from "next-auth";
 import z from "zod";
-
+import type { Account, Profile, User } from "next-auth";
 declare module "next-auth" {
   interface Session {
     user: {
@@ -115,7 +115,6 @@ export const authOptions = {
             } else {
               console.log("Invalid password for existing user");
             }
-            console.log("This is name", existingUser.name);
           } catch (error) {
             console.log("Error while LogIn", error);
           }
@@ -151,9 +150,8 @@ export const authOptions = {
 
   callbacks: {
     async jwt({ token, user, account }: any) {
-      console.log("JWT Callback - User:", user);
-      console.log("JWT Callback - Account:", account);
-      console.log("OOOOOOOOOOO", token.id);
+      //console.log("JWT Callback - User:", user);
+      //console.log("JWT Callback - Account:", account);
 
       if (user) {
         token.id = user.id;
@@ -163,8 +161,8 @@ export const authOptions = {
       return token;
     },
     async session({ session, token }: any) {
-      console.log("Session Callback - Token:", token);
-      console.log("Session Callback - Initial Session:", session);
+      // console.log("Session Callback - Token:", token);
+      // console.log("Session Callback - Initial Session:", session);
 
       if (token && session.user) {
         session.user.id = token.id as string;
@@ -172,7 +170,7 @@ export const authOptions = {
         session.user.email = token.email || null;
       }
 
-      console.log("Session Callback - Updated Session:", session);
+      //console.log("Session Callback - Updated Session:", session);
       return session;
     },
 

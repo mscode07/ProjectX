@@ -8,9 +8,23 @@ const prisma = new PrismaClient();
 
 export async function GET() {
   const session = await getServerSession(authOptions);
-
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  try {
+    const posts = await prisma.tweet.findMany({
+      include: {
+        user: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+    return NextResponse.json({ data: posts }, { status: 200 });
+  } catch (error) {
+    console.log("Error while fetching from DB", error);
   }
 
   return NextResponse.json({ userId: session.user.id });
@@ -19,10 +33,10 @@ export async function GET() {
 export const POST = async (req: NextRequest) => {
   try {
     const session = await getServerSession(authOptions);
-    console.log("Reaching in Post");
-    console.log(session, "This is the user");
-    console.log(session?.user.id, "This is the userID");
-    console.log(session?.user, "This is the userID");
+    // console.log("Reaching in Post");
+    // console.log(session, "This is the user");
+    // console.log(session?.user.id, "This is the userID");
+    // console.log(session?.user, "This is the userID");
 
     if (!session?.user?.id) {
       return NextResponse.json(

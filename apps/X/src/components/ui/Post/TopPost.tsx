@@ -14,10 +14,10 @@ import { Button } from "../button";
 import { Input } from "../input";
 import { UserAvatar } from "../usrAvatar";
 import X_Icon from "../X_Icon";
-interface TweetInput {
-  content: string;
-  userId: number;
-}
+// interface TweetInput {
+//   content: string;
+//   userId: number;
+// }
 
 export const TopPost = () => {
   const [postInput, setPostInput] = useState("");
