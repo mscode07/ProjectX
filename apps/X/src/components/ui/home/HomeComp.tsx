@@ -10,9 +10,9 @@ export const HomeComp = () => {
         <div className="border border-y-0 custom:w-5/12 w-">
           <CenterComp />
         </div>
-        <div className="h-screen sticky top-0 flex-shrink-0">
+        {/* <div className="invisible h-screen sticky top-0">
           <HomeRight />
-        </div>
+        </div> */}
       </div>
     </div>
   );
