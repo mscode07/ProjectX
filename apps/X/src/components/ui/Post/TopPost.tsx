@@ -14,10 +14,6 @@ import { Button } from "../button";
 import { Input } from "../input";
 import { UserAvatar } from "../usrAvatar";
 import X_Icon from "../X_Icon";
-// interface TweetInput {
-//   content: string;
-//   userId: number;
-// }
 
 export const TopPost = () => {
   const [postInput, setPostInput] = useState("");
@@ -35,6 +31,7 @@ export const TopPost = () => {
     try {
       const res = await axios.post("/api/post", { content: postInput });
       console.log("Post saved successfully:", res.data);
+
       setPostInput("");
     } catch (error) {
       console.log("Errro while Posting", error);

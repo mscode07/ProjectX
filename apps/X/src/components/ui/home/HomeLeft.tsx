@@ -43,12 +43,14 @@ export const HomeLeft = () => {
                 </Link>
               </div>
               <div className="flex items-center text-xl mb-3">
-                <div className="custom:hover:bg-neutral-900 flex gap-4  custom:hover:bg-opacity-40 transition duration-200 custom:hover:rounded-2xl px-4 py-2 items-center">
-                  <div className="hover:bg-neutral-900 flex gap-4 hover:bg-opacity-40 transition duration-200 hover:rounded-2xl text-2xl">
-                    <IoMdSearch />
+                <Link href={"/explore"}>
+                  <div className="custom:hover:bg-neutral-900 flex gap-4  custom:hover:bg-opacity-40 transition duration-200 custom:hover:rounded-2xl px-4 py-2 items-center">
+                    <div className="hover:bg-neutral-900 flex gap-4 hover:bg-opacity-40 transition duration-200 hover:rounded-2xl text-2xl">
+                      <IoMdSearch />
+                    </div>
+                    <div className="custom:visible invisible">Explore</div>
                   </div>
-                  <div className="custom:visible invisible">Explore</div>
-                </div>
+                </Link>
               </div>
               <div className="flex items-center text-xl mb-3">
                 <div className="custom:hover:bg-neutral-900 flex gap-4  custom:hover:bg-opacity-40 transition duration-200 custom:hover:rounded-2xl px-4 py-2">

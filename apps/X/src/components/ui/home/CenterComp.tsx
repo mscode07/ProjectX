@@ -20,7 +20,7 @@ export const CenterComp = () => {
       setLoading(true);
       const response = await axios.get("api/post");
       const tweetData = response.data.data;
-      console.log(">>>>>>>>>>>>>>>>>>>>>>>>", tweetData);
+      // console.log(">>>>>>>>>>>>>>>>>>>>>>>>", tweetData);
 
       if (Array.isArray(tweetData) && response.data.data.length > 0) {
         setTweets(tweetData);
@@ -35,8 +35,14 @@ export const CenterComp = () => {
     const response = await axios.get("api/post");
     console.log("This is from the Centercomp", response);
   };
+
   useEffect(() => {
     fetchTweets();
+
+    // const intervalPolling = setInterval(() => {
+    //   fetchTweets();
+    // }, 5000);
+    // return () => clearInterval(intervalPolling);
   }, []);
   return (
     <div className="">

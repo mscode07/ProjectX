@@ -3,7 +3,6 @@ import { authOptions } from "app/lib/auth";
 import { getServerSession } from "next-auth";
 //? https://github.com/code100x/cms/blob/main/src/app/api/admin/content/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { AiOutlineConsoleSql } from "react-icons/ai";
 
 const prisma = new PrismaClient();
 
@@ -66,45 +65,25 @@ export const POST = async (req: NextRequest) => {
     const tweet = await prisma.tweet.create({
       data: { content, userID: userId },
     });
+    // router.push("")
     console.log("This is the response", tweet);
+
     return NextResponse.json(tweet, { status: 201 });
   } catch (error) {
     console.log("Getting error in Creating", error);
   }
 };
-interface RouteContext {
-  params: {
-    id: string;
-  };
-}
-// export const DELETE = async (
-//   req: NextRequest,
-//   params: { param: { id: string } }
-// ) => {
-//   console.log(params.param.id);
-
-//   try {
-//     console.log("Hitting the Delete");
-//     const tweetId = Number(params.param.id);
-//     const deleteTweet = await prisma.tweet.delete({
-//       where: {
-//         id: tweetId,
-//       },
-//     });
-//     console.log("Deleting the Tweet", deleteTweet);
-//     return NextResponse.json({ mess: "Done with Delete", status: 200 });
-//   } catch (error) {
-//     console.log("Getting this error while deleting", error);
-//     return NextResponse.json(
-//       { error: "Failed to delete tweet" },
-//       { status: 500 }
-//     );
-//   }
-// };
 
 export async function DELETE(req: NextRequest) {
   try {
-    console.log("Hitting the delete");
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { error: "Unauthorized - User not authenticated" },
+        { status: 401 }
+      );
+    }
+    const userDel = session?.user?.id;
     const id = req.nextUrl.searchParams.get("id");
     if (!id) {
       return NextResponse.json(
@@ -112,8 +91,12 @@ export async function DELETE(req: NextRequest) {
         { status: 400 }
       );
     }
-    const deleteTweet = await prisma.tweet.delete({
-      where: { id: Number(id) },
+    const tweetId = Number(id);
+    const deleteTweet = await prisma.tweet.update({
+      where: { id: tweetId, userID: userDel },
+      data: {
+        IsDelete: true,
+      },
     });
     if (!deleteTweet) {
       return NextResponse.json({ message: "Tweet not found" }, { status: 404 });
