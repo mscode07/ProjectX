@@ -1,4 +1,5 @@
 "use client";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Popover,
   PopoverContent,
@@ -11,7 +12,6 @@ import { FaRegBookmark, FaRegComment } from "react-icons/fa6";
 import { FiHeart } from "react-icons/fi";
 import { IoIosStats } from "react-icons/io";
 import { RiDeleteBinLine, RiShare2Line } from "react-icons/ri";
-import { UserAvatar } from "./usrAvatar";
 
 interface TweetProps {
   tweet: {
@@ -27,7 +27,6 @@ interface TweetProps {
 export const TweetComp = ({ tweet }: TweetProps) => {
   const handleDelete = async () => {
     try {
-      console.log("Deleting the Tweet", tweet.id);
       const response = await axios.delete(`/api/post?id=${tweet.id}`);
       console.log("Tweet Deleted", response);
       return NextResponse.json({ status: 200 });
@@ -41,17 +40,25 @@ export const TweetComp = ({ tweet }: TweetProps) => {
         <div className="border border-slate-800 border-spacing-x-0.5">
           <div className="flex p-3 gap-2">
             <div className="mt-1 cursor-pointer">
-              <UserAvatar />
+              <Avatar>
+                <AvatarImage />
+                <AvatarFallback>{tweet.user.name[0]}</AvatarFallback>
+              </Avatar>
             </div>
             <div className="">
               <div className="grid grid-cols-6">
                 <div className="flex col-span-5">
                   <p className="font-bold cursor-pointer">{tweet.user.name}</p>
                   {/* <p> @tweet.content</p> */}
-                  <span className="px-1 ">.</span>
+                  <span className="px-1 mx-1 items-center text-slate-500">
+                    .
+                  </span>
                   <p className="text-slate-500">
                     {" "}
-                    {new Date(tweet.createdDate).toLocaleDateString()}
+                    {new Date(tweet.createdDate).toLocaleString("en-US", {
+                      dateStyle: "short",
+                      timeStyle: "short",
+                    })}
                   </p>
                 </div>
                 {/* <p className="text-end">...</p> */}
@@ -61,14 +68,16 @@ export const TweetComp = ({ tweet }: TweetProps) => {
                       ...
                     </PopoverTrigger>
                     <PopoverContent>
-                      <div className="text-red-700 flex items-center gap-2 cursor-pointer">
-                        <div
-                          className="flex items-center gap-1 cursor-pointer"
-                          onClick={handleDelete}
-                        >
-                          <RiDeleteBinLine />
-                          Delete
-                        </div>
+                      <div className="">
+                        {
+                          <div
+                            className="flex text-red-700 items-center gap-2 cursor-pointer"
+                            onClick={handleDelete}
+                          >
+                            <RiDeleteBinLine />
+                            Delete
+                          </div>
+                        }
                       </div>
                     </PopoverContent>
                   </Popover>
