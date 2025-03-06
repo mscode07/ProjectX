@@ -1,25 +1,29 @@
 "use client";
 
+import { getSession } from "next-auth/react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { AiOutlineThunderbolt } from "react-icons/ai";
 import { CgMoreO } from "react-icons/cg";
 import { FaRegBookmark } from "react-icons/fa";
 import { FaRegUser } from "react-icons/fa6";
 import { GoHome } from "react-icons/go";
 import { IoMdSearch } from "react-icons/io";
-import { TbOctagonPlus } from "react-icons/tb";
 import { MdOutlineMail } from "react-icons/md";
 import { RiGroupLine, RiNotification2Line } from "react-icons/ri";
+import { TbOctagonPlus } from "react-icons/tb";
 import { Button, UserAvatar, X_logo } from "..";
 import GrokIcon from "../Grok";
 import X_Icon from "../X_Icon";
-import Link from "next/link";
-import { useState } from "react";
+
 export const HomeLeft = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+  const session = getSession();
 
   const onPostClick = () => {
     console.log("Click");
-    setIsOpen(!isOpen);
+    router.push("/post");
+    console.log(session, "This is the session");
   };
   return (
     <div>
@@ -138,8 +142,12 @@ export const HomeLeft = () => {
               </div>
             </div>
             <div className="mt-28">
-              <div>
+              <div className="flex gap-2">
                 <UserAvatar />
+                <div>
+                  <p className="font-bold">mscode</p>
+                  <p className="text-slate-600 font-semibold">@mscode07</p>
+                </div>
               </div>
             </div>
           </div>

@@ -6,7 +6,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import axios from "axios";
-import { NextResponse } from "next/server";
 import { BiRepost } from "react-icons/bi";
 import { FaRegBookmark, FaRegComment } from "react-icons/fa6";
 import { FiHeart } from "react-icons/fi";
@@ -29,7 +28,7 @@ export const TweetComp = ({ tweet }: TweetProps) => {
     try {
       const response = await axios.delete(`/api/post?id=${tweet.id}`);
       console.log("Tweet Deleted", response);
-      return NextResponse.json({ status: 200 });
+      return response.data;
     } catch (error) {
       console.log("Error while Deleting Tweet", error);
     }
