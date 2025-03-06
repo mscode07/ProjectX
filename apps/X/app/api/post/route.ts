@@ -75,8 +75,9 @@ export const POST = async (req: NextRequest) => {
 };
 
 export async function DELETE(req: NextRequest) {
-  try {
+  try {    
     const session = await getServerSession(authOptions);
+    
     if (!session?.user?.id) {
       return NextResponse.json(
         { error: "Unauthorized - User not authenticated" },
@@ -91,17 +92,27 @@ export async function DELETE(req: NextRequest) {
         { status: 400 }
       );
     }
+    const tweet = await prisma.tweet.findUnique({
+      where: { id: Number(id) },
+    });
+    if (!tweet) {
+      return NextResponse.json(
+        { message: "Tweet not found" },
+        { status: 404 }
+      );
+    }
+    if (tweet.userID !== Number(userDel)) {
+      return NextResponse.json({message:"Unauthorized"})
+    }
     const tweetId = Number(id);
     const deleteTweet = await prisma.tweet.update({
-      where: { id: tweetId, userID: userDel },
+      where: { id: tweetId},
       data: {
         IsDelete: true,
       },
     });
-    if (!deleteTweet) {
-      return NextResponse.json({ message: "Tweet not found" }, { status: 404 });
-    }
-
+    console.log("This is the response", deleteTweet);
+    
     return NextResponse.json({ message: "Done with delete" }, { status: 200 });
   } catch (error) {
     console.log("Getting error in Delete", error);
