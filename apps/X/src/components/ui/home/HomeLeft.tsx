@@ -1,6 +1,5 @@
 "use client";
 
-import { getSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AiOutlineThunderbolt } from "react-icons/ai";
@@ -15,15 +14,16 @@ import { TbOctagonPlus } from "react-icons/tb";
 import { Button, UserAvatar, X_logo } from "..";
 import GrokIcon from "../Grok";
 import X_Icon from "../X_Icon";
+import { useSession } from "next-auth/react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export const HomeLeft = () => {
   const router = useRouter();
-  const session = getSession();
+  const { data: session } = useSession();
 
   const onPostClick = () => {
     console.log("Click");
     router.push("/post");
-    console.log(session, "This is the session");
   };
   return (
     <div>
@@ -143,15 +143,20 @@ export const HomeLeft = () => {
             </div>
             <div className="mt-28">
               <div className="flex gap-2">
-                <UserAvatar />
+                <Avatar>
+                  <AvatarImage src={session?.user?.image || ''} alt={session?.user?.name || 'User'} />
+                  <AvatarFallback>{session?.user?.name?.[0]}</AvatarFallback>
+                </Avatar>
                 <div>
-                  <p className="font-bold">mscode</p>
-                  <p className="text-slate-600 font-semibold">@mscode07</p>
+                  <p className="font-bold">{session?.user?.name}</p>
+                  <p className="text-slate-600 font-semibold">
+                    @{session?.user?.username}
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </div>  
       </div>
     </div>
   );
