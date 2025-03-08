@@ -84,9 +84,9 @@ export const TweetComp = ({ tweet }: TweetProps) => {
               </div>
               <div className="flex flex-col">
                 <div className="list-inside">{tweet.content}</div>
-                <div className="cursor-pointer">Image Part</div>
+                {/* <div className="cursor-pointer">Image Part</div> */}
               </div>
-              <div className="flex space-x-24 text-slate-600">
+              <div className="flex space-x-24 text-slate-600 mt-5">
                 <FaRegComment className="cursor-pointer" />
                 <BiRepost className="cursor-pointer" />
                 <FiHeart className="cursor-pointer" />
