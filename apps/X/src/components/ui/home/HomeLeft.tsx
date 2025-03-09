@@ -158,6 +158,6 @@ export const HomeLeft = () => {
           </div>
         </div>  
       </div>
-    </div>
+    </div> 
   );
-};
+}; 
