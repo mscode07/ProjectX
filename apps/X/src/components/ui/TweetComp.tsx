@@ -37,18 +37,18 @@ export const TweetComp = ({ tweet }: TweetProps) => {
     <div>
       <div>
         <div className="border border-slate-800 border-spacing-x-0.5">
-          <div className="flex p-3 gap-2">
+          <div className="flex p-3 gap-2 w-full">
             <div className="mt-1 cursor-pointer">
               <Avatar>
                 <AvatarImage />
                 <AvatarFallback>{tweet.user.name[0]}</AvatarFallback>
               </Avatar>
             </div>
-            <div className="">
+            <div className="w-full">
               <div className="grid grid-cols-6">
                 <div className="flex col-span-5">
                   <p className="font-bold cursor-pointer">{tweet.user.name}</p>
-                  {/* <p> @tweet.content</p> */}
+                  <p className="text-slate-500 pl-2">@{tweet.user.name}</p>
                   <span className="px-1 mx-1 items-center text-slate-500">
                     .
                   </span>
@@ -61,7 +61,7 @@ export const TweetComp = ({ tweet }: TweetProps) => {
                   </p>
                 </div>
                 {/* <p className="text-end">...</p> */}
-                <div className="ml-auto cursor-pointer hover:bg-black hover:rounded-2xl">
+                <div className="flex justify-end cursor-pointer hover:bg-black hover:rounded-2xl pr-3">
                   <Popover>
                     <PopoverTrigger className="font-bold text-slate-500">
                       ...
@@ -92,7 +92,7 @@ export const TweetComp = ({ tweet }: TweetProps) => {
                 <FiHeart className="cursor-pointer" />
                 {/* <span>{tweet.likes} </span> */}
                 <IoIosStats className="cursor-pointer" />
-                <div className="flex">
+                <div className="flex gap-3">
                   <FaRegBookmark className="cursor-pointer" />
                   <RiShare2Line className="cursor-pointer" />
                 </div>

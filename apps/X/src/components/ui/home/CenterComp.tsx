@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { TopHead, TopPost, TweetComp } from "..";
+import { LoaderComp, TopHead, TopPost, TweetComp, X_logo } from "..";
 
 interface Tweet {
   id: number;
@@ -20,8 +20,6 @@ export const CenterComp = () => {
       setLoading(true);
       const response = await axios.get("api/post");
       const tweetData = response.data.data;
-      // console.log(">>>>>>>>>>>>>>>>>>>>>>>>", tweetData);
-
       if (Array.isArray(tweetData) && response.data.data.length > 0) {
         setTweets(tweetData);
       } else {
@@ -53,7 +51,9 @@ export const CenterComp = () => {
         <TopPost />
       </div>
       {loading ? (
-        <div>Loading</div>
+        <div className="flex items-center justify-center h-screen">
+          <LoaderComp />
+        </div>
       ) : error ? (
         <div>{error}</div>
       ) : (

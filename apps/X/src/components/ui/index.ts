@@ -14,13 +14,22 @@ import { Button } from "./button";
 import { HomeComp } from "./home/HomeComp";
 import { HomeLeft } from "./home/HomeLeft";
 import { TopHead } from "./Post/topHead";
-import { TopPost } from "./Post/TopPost";
+import { TopPost } from "./Post/TopNavbar";
+import { LoaderComp } from "../LoaderComp";
+import { TopHeader } from "../TopHeader";
+import { userInfo } from "os";
+
+import { X_loaderComp } from "../X_loaderComp";
 
 export {
   TopHead,
   TopPost,
   SigninComp,
   HomeComp,
+  LoaderComp,
+  TopHeader,
+  X_loaderComp,
+  userInfo,
   HomeLeft,
   Button,
   UserAvatar,

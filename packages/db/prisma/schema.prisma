@@ -23,6 +23,8 @@ model User {
   image       String?
   tweets      Tweet[]
   createdDate DateTime @default(now())
+  DOB         DateTime?
+  location    String?
 }
 
 model Tweet {

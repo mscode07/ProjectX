@@ -1,5 +1,7 @@
 "use client";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AiOutlineThunderbolt } from "react-icons/ai";
@@ -11,11 +13,9 @@ import { IoMdSearch } from "react-icons/io";
 import { MdOutlineMail } from "react-icons/md";
 import { RiGroupLine, RiNotification2Line } from "react-icons/ri";
 import { TbOctagonPlus } from "react-icons/tb";
-import { Button, UserAvatar, X_logo } from "..";
+import { Button, X_logo } from "..";
 import GrokIcon from "../Grok";
 import X_Icon from "../X_Icon";
-import { useSession } from "next-auth/react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export const HomeLeft = () => {
   const router = useRouter();
@@ -113,12 +113,14 @@ export const HomeLeft = () => {
                 </div>
               </div>
               <div className="flex items-center text-xl mb-3">
-                <div className="custom:hover:bg-neutral-900 flex gap-4 custom:hover:bg-opacity-40 transition duration-200 custom:hover:rounded-2xl px-4 py-2">
-                  <div className="hover:bg-neutral-900 flex gap-4 hover:bg-opacity-40 transition duration-200 hover:rounded-2xl text-2xl">
-                    <FaRegUser />
+                <Link href="/profile">
+                  <div className="custom:hover:bg-neutral-900 flex gap-4 custom:hover:bg-opacity-40 transition duration-200 custom:hover:rounded-2xl px-4 py-2">
+                    <div className="hover:bg-neutral-900 flex gap-4 hover:bg-opacity-40 transition duration-200 hover:rounded-2xl text-2xl">
+                      <FaRegUser />
+                    </div>
+                    <div className="custom:visible invisible">Profile</div>
                   </div>
-                  <div className="custom:visible invisible">Profile</div>
-                </div>
+                </Link>
               </div>
               <div className="flex items-center py-0.5 gap-4 text-xl">
                 <div className="custom:hover:bg-neutral-900 flex gap-4 custom:hover:bg-opacity-40 transition duration-200 custom:hover:rounded-2xl px-4 py-2">
@@ -144,10 +146,13 @@ export const HomeLeft = () => {
             <div className="mt-28">
               <div className="flex gap-2">
                 <Avatar>
-                  <AvatarImage src={session?.user?.image || ''} alt={session?.user?.name || 'User'} />
+                  <AvatarImage
+                    src={session?.user?.image || ""}
+                    alt={session?.user?.name || "User"}
+                  />
                   <AvatarFallback>{session?.user?.name?.[0]}</AvatarFallback>
                 </Avatar>
-                <div>
+                <div className="hidden custom:block">
                   <p className="font-bold">{session?.user?.name}</p>
                   <p className="text-slate-600 font-semibold">
                     @{session?.user?.username}
@@ -156,8 +161,8 @@ export const HomeLeft = () => {
               </div>
             </div>
           </div>
-        </div>  
+        </div>
       </div>
-    </div> 
+    </div>
   );
-}; 
+};
