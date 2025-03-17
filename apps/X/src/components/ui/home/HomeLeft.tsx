@@ -1,5 +1,7 @@
 "use client";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AiOutlineThunderbolt } from "react-icons/ai";
@@ -11,11 +13,9 @@ import { IoMdSearch } from "react-icons/io";
 import { MdOutlineMail } from "react-icons/md";
 import { RiGroupLine, RiNotification2Line } from "react-icons/ri";
 import { TbOctagonPlus } from "react-icons/tb";
-import { Button, UserAvatar, X_logo } from "..";
+import { Button, X_logo } from "..";
 import GrokIcon from "../Grok";
 import X_Icon from "../X_Icon";
-import { useSession } from "next-auth/react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export const HomeLeft = () => {
   const router = useRouter();
@@ -152,7 +152,7 @@ export const HomeLeft = () => {
                   />
                   <AvatarFallback>{session?.user?.name?.[0]}</AvatarFallback>
                 </Avatar>
-                <div>
+                <div className="hidden custom:block">
                   <p className="font-bold">{session?.user?.name}</p>
                   <p className="text-slate-600 font-semibold">
                     @{session?.user?.username}

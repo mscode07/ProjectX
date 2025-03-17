@@ -10,14 +10,11 @@ const page = () => {
         <HomeLeft />
       </div>
       <div className="flex flex-grow">
-        <div className="border border-y-0 custom:w-5/12 w-">
+        <div className="border border-y-0 custom:w-6/12 w-10/12">
           <div>
             <UserInfo />
           </div>
         </div>
-        {/* <div className="invisible h-screen sticky top-0">
-        <HomeRight />
-      </div> */}
       </div>
     </div>
   );
