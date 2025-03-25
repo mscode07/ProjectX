@@ -60,7 +60,6 @@ export const TweetComp = ({ tweet }: TweetProps) => {
                     })}
                   </p>
                 </div>
-                {/* <p className="text-end">...</p> */}
                 <div className="flex justify-end cursor-pointer hover:bg-black hover:rounded-2xl pr-3">
                   <Popover>
                     <PopoverTrigger className="font-bold text-slate-500">

@@ -1,6 +1,6 @@
 "use client";
 
-import { CenterComp, HomeLeft } from "@/components/ui";
+import { HomeLeft } from "@/components/ui";
 import { UserInfo } from "@/components/ui/Profile/UserInfo";
 
 const page = () => {
