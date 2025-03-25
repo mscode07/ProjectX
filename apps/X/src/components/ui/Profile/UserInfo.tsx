@@ -1,22 +1,42 @@
 "use client";
 import { TopHeader } from "@/components/TopHeader";
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineLink } from "react-icons/ai";
 import { GrLocation } from "react-icons/gr";
 import { IoCalendarOutline } from "react-icons/io5";
 import { PiBalloon } from "react-icons/pi";
 
+interface UserDataProps {
+  DOB: string;
+  location: string;
+  createdDate: string;
+  bio: string;
+}
 export const UserInfo = () => {
   const { data: session } = useSession();
+  const [userData, setUserData] = useState<UserDataProps[] | null>(null);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
+        setLoading(true);
         const response = await axios.get("api/user");
-        console.log("User data", response.data);
+        const u_Data = response.data.data;
+        if (Array.isArray(u_Data) && response.data.data.length > 0) {
+          setUserData(u_Data);
+          console.log(u_Data, "Here it is");
+        } else {
+          setError("No user data found");
+        }
       } catch (error) {
         console.log("Getting user data failed", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchUserData();
@@ -36,12 +56,13 @@ export const UserInfo = () => {
             }}
           >
             <div>
-              <img
-                className="absolute rounded-full w-40 h-40 border-4 border-black bottom-0 top-48 left-3
-                "
-                src="https://github.com/mscode07.png"
-                alt="Extra large avatar"
-              />
+              <Avatar>
+                <AvatarImage
+                  src={session?.user?.image || ""}
+                  alt={session?.user?.name || "User"}
+                />
+                <AvatarFallback>{session?.user?.name?.[0]}</AvatarFallback>
+              </Avatar>
             </div>
           </div>
           <div className="mt-24 ml-3">
@@ -55,7 +76,7 @@ export const UserInfo = () => {
             <div className="flex gap-2">
               <p className="flex items-center text-gray-500 gap-1">
                 <GrLocation className="text-xl" />
-                location
+                {userData?.[0]?.location || "Location"}
               </p>
               <a
                 className="text-blue-500 flex items-center gap-1"
@@ -65,11 +86,13 @@ export const UserInfo = () => {
                 buymeacoffee.com/mscode07
               </a>
               <p className="flex items-center text-gray-500 gap-1">
-                <PiBalloon className="text-xl font-bold" /> {}
+                <PiBalloon className="text-xl font-bold" />
+                {userData?.[0]?.DOB || "DOB"}
               </p>
             </div>
             <p className="flex items-center text-gray-500 gap-2">
-              <IoCalendarOutline className="text-lg" /> Joined December 2017
+              <IoCalendarOutline className="text-lg" />{" "}
+              {userData?.[0]?.createdDate}
             </p>
             <div className="flex gap-2 mt-2">
               <div className="flex">

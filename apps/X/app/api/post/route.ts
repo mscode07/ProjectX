@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { authOptions } from "app/lib/auth";
+import { error } from "console";
 import { getServerSession } from "next-auth";
 //? https://github.com/code100x/cms/blob/main/src/app/api/admin/content/route.ts
 import { NextRequest, NextResponse } from "next/server";
@@ -42,33 +43,41 @@ export const POST = async (req: NextRequest) => {
         { error: "Unauthorized - User not authenticated" },
         { status: 401 }
       );
-    } else {
-      console.log("reaching");
     }
+    const sessionUserId = parseInt(session.user.id);
+    const user = await prisma.user.findFirst({ where: { id: sessionUserId } });
 
+    // if (!user) {
+    //   return NextResponse.json({ error: "Not a valid User" }, { status: 401 });
+    // }
     const body = await req.json();
     console.log("Request Body:", body);
 
+    console.log("Checking body content...");
     if (!body || !body.content) {
       return NextResponse.json(
-        { error: "content is requried" },
+        { error: "content is required" },
         { status: 400 }
       );
     }
+    console.log("Parsing the content...");
     const userId = parseInt(session.user.id);
     if (isNaN(userId)) {
       return NextResponse.json({ error: "Invalid user ID" }, { status: 400 });
     }
     const { content } = body;
+    console.log("Creating tweet with userId:", userId, "and content:", content);
     const tweet = await prisma.tweet.create({
       data: { content, userID: userId },
     });
-    // router.push("")
     console.log("This is the response", tweet);
-
-    return NextResponse.json(tweet, { status: 201 });
+    return NextResponse.json(tweet, { status: 200 });
   } catch (error) {
     console.log("Getting error in Creating", error);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 };
 

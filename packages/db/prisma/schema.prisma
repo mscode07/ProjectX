@@ -25,6 +25,7 @@ model User {
   createdDate DateTime @default(now())
   DOB         DateTime?
   location    String?
+  bioLink     String?
 }
 
 model Tweet {
