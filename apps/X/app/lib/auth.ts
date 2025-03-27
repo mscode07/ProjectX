@@ -109,7 +109,7 @@ export const authOptions = {
               console.log("This is username", existingUser.username);
               return {
                 id: existingUser.id.toString(),
-                usernname: existingUser.username,
+                username: existingUser.username,
                 email: existingUser.email,
                 name: existingUser.name,
               };
