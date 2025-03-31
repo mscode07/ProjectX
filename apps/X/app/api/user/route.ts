@@ -6,8 +6,6 @@ import { NextResponse } from "next/server";
 const prisma = new PrismaClient();
 
 export const GET = async () => {
-  console.log("Hitting the user get rout");
-
   const session = await getServerSession(authOptions);
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -16,7 +14,6 @@ export const GET = async () => {
   const userID = session.user.id;
 
   try {
-    console.log("Hitting the user get rout 22");
     const user = await prisma.user.findMany({
       include: {
         tweets: {
@@ -27,7 +24,7 @@ export const GET = async () => {
       },
       where: { id: Number(userID) },
     });
-    console.log("This is the response", user);
+    //console.log("This is the User from User Route", user);
     return NextResponse.json({ data: user }, { status: 200 });
   } catch (error) {
     console.log("Error while fetching from DB", error);

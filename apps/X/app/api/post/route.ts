@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 import { authOptions } from "app/lib/auth";
-import { error } from "console";
 import { getServerSession } from "next-auth";
 //? https://github.com/code100x/cms/blob/main/src/app/api/admin/content/route.ts
 import { NextRequest, NextResponse } from "next/server";
@@ -29,7 +28,6 @@ export async function GET() {
   } catch (error) {
     console.log("Error while fetching from DB", error);
   }
-
   return NextResponse.json({ userId: session.user.id });
 }
 
@@ -47,9 +45,6 @@ export const POST = async (req: NextRequest) => {
     const sessionUserId = parseInt(session.user.id);
     const user = await prisma.user.findFirst({ where: { id: sessionUserId } });
 
-    // if (!user) {
-    //   return NextResponse.json({ error: "Not a valid User" }, { status: 401 });
-    // }
     const body = await req.json();
     console.log("Request Body:", body);
 

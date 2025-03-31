@@ -113,7 +113,7 @@ export const HomeLeft = () => {
                 </div>
               </div>
               <div className="flex items-center text-xl mb-3">
-                <Link href="/profile">
+                <Link href={`/${session?.user?.username}`}>
                   <div className="custom:hover:bg-neutral-900 flex gap-4 custom:hover:bg-opacity-40 transition duration-200 custom:hover:rounded-2xl px-4 py-2">
                     <div className="hover:bg-neutral-900 flex gap-4 hover:bg-opacity-40 transition duration-200 hover:rounded-2xl text-2xl">
                       <FaRegUser />
