@@ -12,6 +12,7 @@ import { PiBalloon } from "react-icons/pi";
 import { Button } from "../button";
 import { TweetComp } from "../TweetComp";
 import { NextResponse } from "next/server";
+import { LoaderComp } from "@/components/LoaderComp";
 
 interface UserDataProps {
   DOB: string;
@@ -280,9 +281,17 @@ export const UserInfo = () => {
       <br />
       <hr />
       <div>
-        {userTweet.map((tweet) => (
-          <TweetComp key={tweet.id} tweet={tweet} />
-        ))}
+        {loading ? (
+          <div className="flex items-center justify-center h-screen">
+            <LoaderComp />
+          </div>
+        ) : (
+          <div>
+            {userTweet.map((tweet) => (
+              <TweetComp key={tweet.id} tweet={tweet} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

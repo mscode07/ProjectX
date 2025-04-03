@@ -36,7 +36,7 @@ export const TweetComp = ({ tweet }: TweetProps) => {
   return (
     <div>
       <div>
-        <div className="border border-slate-800 border-spacing-x-0.5">
+        <div className="border border-slate-800 border-spacing-x-0.5 hover:bg-neutral-900/60 transition duration-400 cursor-pointer">
           <div className="flex p-3 gap-2 w-full">
             <div className="mt-1 cursor-pointer">
               <Avatar>
@@ -60,9 +60,9 @@ export const TweetComp = ({ tweet }: TweetProps) => {
                     })}
                   </p>
                 </div>
-                <div className="flex justify-end cursor-pointer hover:bg-black hover:rounded-2xl pr-3">
+                <div className="flex justify-end cursor-pointer hover:bg-neutral-900/40 hover:rounded-2xl pr-3">
                   <Popover>
-                    <PopoverTrigger className="font-bold text-slate-500">
+                    <PopoverTrigger className="font-bold text-slate-500 hover:bg-blue-500/30 hover:text-blue-500 rounded-full h-8 w-8 text-center transition duration-200">
                       ...
                     </PopoverTrigger>
                     <PopoverContent>

@@ -26,7 +26,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <Provider>
-        <body className={`${geistSans.variable} ${geistMono.variable} m-0`}>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} m-0 bg-black`}
+        >
           <RouteGard>{children}</RouteGard>
         </body>
       </Provider>
