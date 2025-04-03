@@ -20,7 +20,7 @@ export const TopHeader = () => {
         </div>
         <div>
           <p className="font-bold text-xl">{session?.user?.name}</p>
-          <p className="text-gray-500">28.3K posts</p>
+          <p className="text-gray-500">33.5K posts</p>
         </div>
       </div>
     </div>

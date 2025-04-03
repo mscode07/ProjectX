@@ -19,7 +19,7 @@ export const TopPost = () => {
   const [postInput, setPostInput] = useState("");
   const { data: session } = useSession();
 
-  const handelChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handelChanges = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPostInput(e.target.value);
   };
   const handelClick = async () => {
@@ -31,7 +31,6 @@ export const TopPost = () => {
     try {
       const res = await axios.post("/api/post", { content: postInput });
       console.log("Post saved successfully:", res.data);
-
       setPostInput("");
     } catch (error) {
       console.log("Errro while Posting", error);
@@ -40,21 +39,29 @@ export const TopPost = () => {
   return (
     <div>
       <div className="p-3 border border-x-0">
-        <div className="flex">
+        <div className="flex ">
           <div>
             <UserAvatar />
           </div>
           <div>
-            <Input
+            {/* <Input
               className="focus:outline-none focus-visible:ring-0 border-none"
               placeholder="What is hanppening?!"
               onChange={handelChanges}
               value={postInput}
               name="Post"
+            /> */}
+            <textarea
+              placeholder="What's happening?"
+              className="focus:outline-none focus-visible:ring-0 w-96  ml-3 mt-3 bg-transparent border-none p-3 rounded-lg text-white resize-none overflow-auto "
+              value={postInput}
+              onChange={handelChanges}
+              name="Post"
             />
           </div>
         </div>
-        <div className="flex items-center ml-12">
+        <hr />
+        <div className="flex items-center ml-12 mt-2">
           <div className="flex gap-4 text-blue-500 text-lg cursor-pointer">
             <div className="relative group hover:bg-neutral-900 rounded-xl ">
               <div>
