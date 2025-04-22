@@ -1,3 +1,4 @@
+"use client";
 import axios from "axios";
 import { Button } from "../button";
 import { useState } from "react";
@@ -30,7 +31,7 @@ export const EditProfileComp = () => {
     e.preventDefault();
     console.log("submiting", formInput);
     try {
-      const response = await axios.post("/api/user", formInput); 
+      const response = await axios.post("/api/user", formInput);
     } catch (error) {
       console.error("Error updating Profile", error);
     }

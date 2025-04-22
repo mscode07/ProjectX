@@ -42,15 +42,14 @@ interface EditUserInfoProp {
   dob: string;
 }
 
-export const POST = async (req: NextRequest, user: EditUserInfoProp) => {
+export const POST = async (req: NextRequest) => {
   console.log("Hitting here");
   try {
     const session = await getServerSession(authOptions);
     if (!session) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
-    const body = await req.json();
-    console.log("Request Body:", body);
+    const user: EditUserInfoProp = await req.json();
     const userID = session?.user?.id;
 
     const updatedUser = await prisma.user.update({
@@ -64,7 +63,6 @@ export const POST = async (req: NextRequest, user: EditUserInfoProp) => {
       where: { id: userID },
     });
 
-    console.log(updatedUser, "<<<<<<<<<<<<<<<<<<<<<<<");
     return NextResponse.json(
       { message: "Profile updated successfully", data: updatedUser },
       { status: 200 }
