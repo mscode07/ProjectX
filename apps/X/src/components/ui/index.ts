@@ -20,8 +20,10 @@ import { TopHeader } from "../TopHeader";
 import { userInfo } from "os";
 
 import { X_loaderComp } from "../X_loaderComp";
+import { EditProfileComp } from "./Profile/EditProfileComp";
 
 export {
+  EditProfileComp,
   TopHead,
   TopPost,
   SigninComp,

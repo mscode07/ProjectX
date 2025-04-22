@@ -139,12 +139,6 @@ export const HomeLeft = () => {
                 </div>
               </div>
               <div className="">
-                {/* <Button
-                  className="invisible custom:visible rounded-3xl w-full custom:mt-3 px-20 py-6 font-semibold"
-                  onClick={onPostClick}
-                >
-                  Post
-                </Button> */}
                 <Dialog>
                   <DialogTrigger className="invisible custom:visible rounded-3xl w-full custom:mt-3 px-20 py-3  font-semibold bg-white text-black items-start">
                     Post

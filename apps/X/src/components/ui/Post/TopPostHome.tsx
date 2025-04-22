@@ -23,7 +23,6 @@ export const TopPost = () => {
     setPostInput(e.target.value);
   };
   const handelClick = async () => {
-    console.log(postInput);
     if (!session?.user?.email) {
       console.error("No User session found");
       return;
