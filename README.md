@@ -1,6 +1,6 @@
-# Turborepo starter
+# Welcome to ProjectX
 
-This is an official starter Turborepo.
+This is a Clone application of the social media platform 𝕏.
 
 ## Using this example
 
